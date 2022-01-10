@@ -1,0 +1,80 @@
+@model Pizza_App.Models.orden
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear</h1>
+
+<h4>Orden</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nombre_solicitante" class="control-label"></label>
+                <input asp-for="nombre_solicitante" class="form-control" />
+                <span asp-validation-for="nombre_solicitante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pizzaId" class="control-label"></label>
+                <select asp-for="pizzaId" class="form-control" asp-items="ViewBag.pizzaId">
+                    <option value="0" selected="selected">--SELECCIONE--</option>
+                </select>
+                <span asp-validation-for="pizzaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cantidad" class="control-label"></label>
+                <input asp-for="cantidad" class="form-control" />
+                <span asp-validation-for="cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fecha_orden" class="control-label"></label>
+                <input asp-for="fecha_orden" class="form-control" />
+                <span asp-validation-for="fecha_orden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="direccion_envio" class="control-label"></label>
+                <input asp-for="direccion_envio" class="form-control" />
+                <span asp-validation-for="direccion_envio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="comentarios" class="control-label"></label>
+                <input asp-for="comentarios" class="form-control" />
+                <span asp-validation-for="comentarios" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="estado_orden" class="control-label"></label>
+                <select asp-for="estado_orden" class="form-control" asp-items="(SelectList)@ViewData["estados"]">
+                    <option value="0" selected="selected">--SELECCIONE--</option>
+                </select>
+                <span asp-validation-for="estado_orden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="usuarioId" class="control-label"></label>
+                <select asp-for="usuarioId" class="form-control" asp-items="ViewBag.usuarioId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (User.IsInRole("ADMIN")) { 
+    <div>
+        <a asp-action="Index">Regresar a Lista</a>
+    </div>
+}else
+    {
+        <div>
+            <a asp-action="PendingOrders">Regresar a Lista de ordenes pendientes</a>
+        </div>
+    }
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

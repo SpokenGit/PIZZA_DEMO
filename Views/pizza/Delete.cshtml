@@ -1,0 +1,51 @@
+@model Pizza_App.Models.pizza
+
+@{
+    ViewData["Title"] = "Borrar Pizza";
+}
+
+<h1>Borrar</h1>
+
+<h3>Estas seguro que quieres borrar?</h3>
+<div>
+    <h4>pizza</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nombre_pizza)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nombre_pizza)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cantidad_porciones)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cantidad_porciones)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.precio_unitario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.precio_unitario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tamano)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tamano)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar a Lista</a>
+    </form>
+</div>

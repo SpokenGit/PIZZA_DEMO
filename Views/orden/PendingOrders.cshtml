@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Pizza_App.Models.pendingOrders>
+
+@{
+    ViewData["Title"] = "Lista de Ordenes Pendientes de entrega";
+}
+
+<div>
+    <a asp-action="CatalogoPizza" asp-controller="pizza">Ver catalogo de Pizzas</a><br>
+    <a asp-action="Create" asp-controller="orden">Agregar una nueva Orden</a>
+</div>
+<br>
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Numero de Orden
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.solicitanteOrden)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cantidadOrden)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precioOrden)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.totalOrden)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.numeroOrden)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.solicitanteOrden)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.cantidadOrden)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.precioOrden)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.totalOrden)
+                </td>
+                <td></td>
+            </tr>
+                }
+        </tbody>
+    </table>

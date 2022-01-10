@@ -1,0 +1,69 @@
+@model Pizza_App.Models.orden
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Editar</h1>
+
+<h4>orden</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="nombre_solicitante" class="control-label"></label>
+                <input asp-for="nombre_solicitante" class="form-control" />
+                <span asp-validation-for="nombre_solicitante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pizzaId" class="control-label"></label>
+                <select asp-for="pizzaId" class="form-control" asp-items="ViewBag.pizzaId"></select>
+                <span asp-validation-for="pizzaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cantidad" class="control-label"></label>
+                <input asp-for="cantidad" class="form-control" />
+                <span asp-validation-for="cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fecha_orden" class="control-label"></label>
+                <input asp-for="fecha_orden" class="form-control" />
+                <span asp-validation-for="fecha_orden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="direccion_envio" class="control-label"></label>
+                <input asp-for="direccion_envio" class="form-control" />
+                <span asp-validation-for="direccion_envio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="comentarios" class="control-label"></label>
+                <input asp-for="comentarios" class="form-control" />
+                <span asp-validation-for="comentarios" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="estado_orden" class="control-label"></label>
+                <select asp-for="estado_orden" class="form-control" asp-items="(SelectList)@ViewData["estados"] "></select>
+                <span asp-validation-for="estado_orden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="usuarioId" class="control-label"></label>
+                <select asp-for="usuarioId" class="form-control" asp-items="ViewBag.usuarioId"></select>
+                <span asp-validation-for="usuarioId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar a Lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
