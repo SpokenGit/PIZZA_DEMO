@@ -16,6 +16,7 @@ namespace Pizza_App.Models
         public string nombre_pizza { get; set; }
         [Display(Name = "Cantidad")]
         [Required(ErrorMessage = "Cantidad mandatorio")]
+        [Range(0, double.MaxValue, ErrorMessage = "La cantidad debe ser mayor a 0")]
         public int cantidad_porciones { get; set; }
         [Display(Name = "Descripcion")]
         [Required(ErrorMessage = "Descripcion mandatorio")]

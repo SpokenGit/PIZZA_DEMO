@@ -112,7 +112,7 @@ namespace Pizza_App.Controllers
         }
 
         // GET: orden/Edit/5
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = "ADMIN,EMPLEADO")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -138,7 +138,7 @@ namespace Pizza_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = "ADMIN,EMPLEADO")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,nombre_solicitante,pizzaId,cantidad,fecha_orden,direccion_envio,comentarios,estado_orden,usuarioId")] orden orden)
         {
             if (id != orden.Id)
@@ -166,7 +166,11 @@ namespace Pizza_App.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                if (User.IsInRole("ADMIN"))
+                    return RedirectToAction(nameof(Index));
+                else
+                    return RedirectToAction(nameof(PendingOrders));
+
             }
             ViewData["pizzaId"] = new SelectList(_context.pizzas, "Id", "nombre_pizza", orden.pizzaId);
             ViewData["usuarioId"] = new SelectList(_context.usuarios, "Id", "nombre_usuario", orden.usuarioId);

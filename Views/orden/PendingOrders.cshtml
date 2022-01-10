@@ -10,7 +10,7 @@
 </div>
 <br>
 <br>
-<h4>Listado de Ordenes Pendientes de Entrega ordenadas por orden de llegada</h4><br />
+<h4>Informe de Ordenes Pendientes de Entrega ordenadas por orden de llegada</h4><br />
 <table class="table">
     <thead>
         <tr>
@@ -24,7 +24,7 @@
                 Cantidad
             </th>
             <th>
-                Precio Orden
+                Precio Unitario
             </th>
             <th>
                 Total Orden
@@ -33,7 +33,7 @@
             {
                 <th> Usuario Orden</th>
              }
-
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -58,7 +58,8 @@
             @if (User.IsInRole("ADMIN"))
             {
                 <td>   @Html.DisplayFor(model => item.usuarioOrden)</td>
-              }
+            }
+        <td>  <a asp-action="Edit" asp-route-id="@item.numeroOrden">Editar</a> </td>
 
         </tr>
                 }

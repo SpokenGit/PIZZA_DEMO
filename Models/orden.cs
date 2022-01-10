@@ -11,6 +11,7 @@ namespace Pizza_App.Models
     {
         public int Id { get; set; }
         [MaxLength(100)]
+        [Required(ErrorMessage = "Nombre del Solicitante mandatorio")]
         [Display(Name= "Nombre del Solicitante")]
         public string nombre_solicitante { get; set; }
         [Display(Name ="Tipo de Pizza")]
@@ -18,6 +19,7 @@ namespace Pizza_App.Models
         public int pizzaId { get; set; }
         public pizza pizza { get; set; }
         [Display(Name ="Cantidad")]
+        [Range(0, double.MaxValue, ErrorMessage = "La cantidad debe ser mayor a 0")]
         public int cantidad { get; set; }
         [Display(Name ="Fecha de Orden")]
         public DateTime fecha_orden { get; set; }

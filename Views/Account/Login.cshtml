@@ -1,9 +1,22 @@
 ﻿@model Pizza_App.Models.Account
 
+<style type="text/css">
+    .abs-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
 
-<div class="row align-content-center">
-    <div class="col-md-4 align-content-center">
-        <form asp-action="Login">
+    .form {
+        width: 450px;
+    }
+</style>
+
+
+<div style="width:100%">
+    <div class="abs-center">
+        <form asp-action="Login" class="border p-3 form">
             <div class="form-group">
                 <label asp-for="userlogged" class="control-label">Usuario</label>
                 <input asp-for="userlogged" class="form-control" />
