@@ -13,5 +13,6 @@ namespace Pizza_App.Models
         public int cantidadOrden { get; set; }
         public decimal precioOrden { get; set; }
         public decimal totalOrden { get; set; }
+        public string usuarioOrden { get; set; }
     }
 }

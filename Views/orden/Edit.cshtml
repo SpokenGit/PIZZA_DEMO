@@ -45,12 +45,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="estado_orden" class="control-label"></label>
-                <select asp-for="estado_orden" class="form-control" asp-items="(SelectList)@ViewData["estados"] "></select>
+                <select asp-for="estado_orden"  class="form-control" asp-items="(SelectList)@ViewData["estados"] "></select>
                 <span asp-validation-for="estado_orden" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="usuarioId" class="control-label"></label>
-                <select asp-for="usuarioId" class="form-control" asp-items="ViewBag.usuarioId"></select>
+                <select asp-for="usuarioId" disabled class="form-control" asp-items="ViewBag.usuarioId"></select>
                 <span asp-validation-for="usuarioId" class="text-danger"></span>
             </div>
             <div class="form-group">

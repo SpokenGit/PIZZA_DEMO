@@ -18,28 +18,35 @@
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="usuario" asp-action="Index">Usuarios</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="pizza" asp-action="Index">Pizzas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="orden" asp-action="Index">Ordenes</a>
-                            </li>
-                        </ul>
-                    </div>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="orden" asp-action="PendingOrders">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="usuario" asp-action="Index">Administracion de Usuarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="pizza" asp-action="Index">Administracion de Pizzas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="orden" asp-action="Index">Administracion Ordenes</a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+
                     @*Logout*@
                     <div class="row">
                         <div class="col-md-12">
-                          
+
                             Hola @User.Identity.Name !, Role @User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Role)?.Value
                             <a asp-action="Logout" asp-controller="Account">
                                 Logout
                             </a>
-                            
+
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +18,7 @@ namespace Pizza_App.Controllers
     {
         private readonly MyContext _context;
         public Dictionary<int, string> estadosList = new Dictionary<int, string>() ;
-
+        private string iduser;
         public ordenController(MyContext context)
         {
             _context = context;
@@ -29,14 +31,14 @@ namespace Pizza_App.Controllers
         [Authorize(Roles = "ADMIN,EMPLEADO")]
         public IActionResult PendingOrders()
         {
-            var MypendingOrders = _context.ordenes.Include(o => o.pizza).Include(o => o.usuario);
-            MypendingOrders.Where(s=> s.estado_orden == 2);
+            var MypendingOrders = _context.ordenes.Include(o => o.pizza).Include(o => o.usuario).Where(s => s.estado_orden.Equals(2));
+            
             List<pendingOrders> Listpendingorders = new List<pendingOrders>();
             foreach (var item in MypendingOrders)
             {
                 Listpendingorders.Add(new pendingOrders() 
                 { fechaorden= item.fecha_orden, numeroOrden = item.Id,   cantidadOrden = item.cantidad, solicitanteOrden = item.nombre_solicitante, 
-                precioOrden = item.pizza.precio_unitario, totalOrden = Math.Round(item.cantidad*item.pizza.precio_unitario, 2)
+                precioOrden = item.pizza.precio_unitario, totalOrden = Math.Round(item.cantidad*item.pizza.precio_unitario, 2), usuarioOrden=item.usuario.nombre_usuario
             });
             }
             return View(Listpendingorders.OrderBy(f=>f.fechaorden).ToList());
@@ -46,7 +48,7 @@ namespace Pizza_App.Controllers
         [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Index()
         {
-            var myContext = _context.ordenes.Include(o => o.pizza).Include(o => o.usuario);
+            var myContext = _context.ordenes.Include(o => o.pizza).Include(o => o.usuario).OrderBy(c=> c.fecha_orden);
             return View(await myContext.ToListAsync());
         }
 
@@ -75,8 +77,9 @@ namespace Pizza_App.Controllers
         [Authorize(Roles = "ADMIN,EMPLEADO")]
         public IActionResult Create()
         {
+            iduser = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault();
             ViewData["pizzaId"] = new SelectList(_context.pizzas, "Id", "nombre_pizza");
-            ViewData["usuarioId"] = new SelectList(_context.usuarios, "Id", "nombre_usuario");
+            ViewData["usuarioId"] = new SelectList(_context.usuarios, "Id", "nombre_usuario", iduser);                  
             ViewData["estados"] = new SelectList(estadosList,"Key","Value",0);
             return View();
         }
@@ -91,8 +94,15 @@ namespace Pizza_App.Controllers
         {
             if (ModelState.IsValid)
             {
+                iduser = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault();
+                orden.usuarioId = Convert.ToInt32(iduser);
                 _context.Add(orden);
                 await _context.SaveChangesAsync();
+                if (User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Role)?.Value == "EMPLEADO")
+                    {
+                    return RedirectToAction(nameof(PendingOrders));
+                }
+                else
                 return RedirectToAction(nameof(Index));
             }
             ViewData["pizzaId"] = new SelectList(_context.pizzas, "Id", "nombre_pizza", orden.pizzaId);
@@ -111,6 +121,8 @@ namespace Pizza_App.Controllers
             }
 
             var orden = await _context.ordenes.FindAsync(id);
+            iduser = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault();
+            orden.usuarioId = Convert.ToInt32(iduser);
             if (orden == null)
             {
                 return NotFound();
@@ -138,6 +150,8 @@ namespace Pizza_App.Controllers
             {
                 try
                 {
+                    iduser = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault();
+                    orden.usuarioId = Convert.ToInt32(iduser);
                     _context.Update(orden);
                     await _context.SaveChangesAsync();
                 }

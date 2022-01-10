@@ -10,7 +10,7 @@
 </div>
 <br>
 <br>
-
+<h4>Listado de Ordenes Pendientes de Entrega ordenadas por orden de llegada</h4><br />
 <table class="table">
     <thead>
         <tr>
@@ -18,41 +18,49 @@
                 Numero de Orden
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.solicitanteOrden)
+               Solicitante
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cantidadOrden)
+                Cantidad
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.precioOrden)
+                Precio Orden
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.totalOrden)
+                Total Orden
             </th>
-            <th></th>
+            @if (User.IsInRole("ADMIN"))
+            {
+                <th> Usuario Orden</th>
+             }
+
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => item.numeroOrden)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.solicitanteOrden)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.cantidadOrden)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.precioOrden)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.totalOrden)
-                </td>
-                <td></td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.numeroOrden)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.solicitanteOrden)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.cantidadOrden)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.precioOrden)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.totalOrden)
+            </td>
+            @if (User.IsInRole("ADMIN"))
+            {
+                <td>   @Html.DisplayFor(model => item.usuarioOrden)</td>
+              }
+
+        </tr>
                 }
         </tbody>
     </table>

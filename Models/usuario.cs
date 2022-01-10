@@ -17,7 +17,7 @@ namespace Pizza_App.Models
         [Display(Name = "Tipo Usuario")]
         [Required(ErrorMessage = "Tipo mandatorio")]
         public string tipo_usuario { get; set; }
-        [MaxLength(30)]
+        [MaxLength(100)]
         [Display(Name = "Clave")]
         [Required(ErrorMessage = "Clave mandatorio")]
         [DataType(DataType.Password)]

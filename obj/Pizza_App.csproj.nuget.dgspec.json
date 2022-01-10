@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rober\\source\\repos\\Pizza_App\\Pizza_App.csproj": {}
+    "C:\\Users\\rober\\OneDrive\\Documentos\\Personal\\LAB\\PROJECTS\\MVC\\PIZZA_PROJECT\\Pizza_App.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rober\\source\\repos\\Pizza_App\\Pizza_App.csproj": {
+    "C:\\Users\\rober\\OneDrive\\Documentos\\Personal\\LAB\\PROJECTS\\MVC\\PIZZA_PROJECT\\Pizza_App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rober\\source\\repos\\Pizza_App\\Pizza_App.csproj",
+        "projectUniqueName": "C:\\Users\\rober\\OneDrive\\Documentos\\Personal\\LAB\\PROJECTS\\MVC\\PIZZA_PROJECT\\Pizza_App.csproj",
         "projectName": "Pizza_App",
-        "projectPath": "C:\\Users\\rober\\source\\repos\\Pizza_App\\Pizza_App.csproj",
+        "projectPath": "C:\\Users\\rober\\OneDrive\\Documentos\\Personal\\LAB\\PROJECTS\\MVC\\PIZZA_PROJECT\\Pizza_App.csproj",
         "packagesPath": "C:\\Users\\rober\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rober\\source\\repos\\Pizza_App\\obj\\",
+        "outputPath": "C:\\Users\\rober\\OneDrive\\Documentos\\Personal\\LAB\\PROJECTS\\MVC\\PIZZA_PROJECT\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rober\\AppData\\Roaming\\NuGet\\NuGet.Config",

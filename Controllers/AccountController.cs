@@ -42,12 +42,13 @@ namespace Pizza_App.Controllers
                 usuariologeado=   _context.usuarios.Where(u=> u.nombre_usuario.ToUpper().Trim() == usuario.userlogged.ToUpper().Trim()).FirstOrDefault();
                 if (usuariologeado != null)
                 {
-                    if (usuariologeado.password.ToUpper() == usuario.password.ToUpper().Trim())
+                    if (usuariologeado.password.Equals(Security.Security.GetMD5(usuario.password.ToUpper().Trim())))
                     {
                        
                         var identity = new ClaimsIdentity(new[] {
                         new Claim(ClaimTypes.Name, usuariologeado.nombre_usuario),
-                        new Claim(ClaimTypes.Role,usuariologeado.tipo_usuario)
+                        new Claim(ClaimTypes.Role,usuariologeado.tipo_usuario),
+                        new Claim(ClaimTypes.NameIdentifier,usuariologeado.Id.ToString())
                          }, CookieAuthenticationDefaults.AuthenticationScheme);                        
 
                         var principal = new ClaimsPrincipal(identity);
@@ -61,7 +62,7 @@ namespace Pizza_App.Controllers
                             });
                       
                         if(usuariologeado.tipo_usuario=="ADMIN")
-                        return RedirectToAction("Index","orden");
+                        return RedirectToAction("PendingOrders", "orden");
                         else
                             return RedirectToAction("PendingOrders", "orden");
                     }

@@ -58,6 +58,8 @@ namespace Pizza_App.Controllers
         {
             if (ModelState.IsValid)
             {
+                usuario.nombre_usuario = usuario.nombre_usuario.ToUpper().Trim();
+                usuario.password = Security.Security.GetMD5(usuario.password.ToUpper().Trim());
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -97,6 +99,8 @@ namespace Pizza_App.Controllers
             {
                 try
                 {
+                    usuario.nombre_usuario = usuario.nombre_usuario.ToUpper().Trim();
+                    usuario.password = Security.Security.GetMD5(usuario.password.ToUpper().Trim());
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }

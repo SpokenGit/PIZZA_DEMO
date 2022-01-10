@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qbGx/YfTWpbyNm0wt16/go1XAraiqRF5OBBbaL/lp+u+23RKlHqTu/J2dmFGZ8uRWt5C4PGEG8Z1ZgevH9eh5g==",
+  "dgSpecHash": "3gcU5hshSxu15U3mt4t4dciTQkQDuJrxA9OPME4FlQaA4TQuZbleFqY5nSTCVS0rPm6tsVxNtpGD84nK2S1OoA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rober\\source\\repos\\Pizza_App\\Pizza_App.csproj",
+  "projectFilePath": "C:\\Users\\rober\\OneDrive\\Documentos\\Personal\\LAB\\PROJECTS\\MVC\\PIZZA_PROJECT\\Pizza_App.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rober\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\rober\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",
